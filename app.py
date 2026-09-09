@@ -629,7 +629,7 @@ html = r"""
       </div>
     </div>
     <div class="pill">
-      <div class="tiny" id="counter">0 opened</div>
+      <div class="tiny" id="counter">0 / 12 opened</div>
     </div>
   </div>
 
@@ -662,7 +662,7 @@ html = r"""
 
     <div class="bar">
       <div>
-        <div class="nowTitle" id="nowTitle">Current: —</div>
+        <div class="nowTitle" id="nowTitle">📍 Stop 1: Instagram Request 💌</div>
         <div class="nowSub" id="nowSub">👆 Click the gold circles!</div>
       </div>
       <div class="tiny">🎁 Click falling gifts too!</div>
@@ -723,8 +723,8 @@ html = r"""
   ];
   const GIFT_EMOJI = ["🎁","💝","🎁","💝","🎀","💕"];
 
-  const KEY = "mz_love_river_v3";
-  let opened = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+  // NO localStorage - start fresh every time
+  let opened = new Set();
 
   const counter = document.getElementById("counter");
   const nowTitle = document.getElementById("nowTitle");
@@ -772,10 +772,12 @@ html = r"""
   function updateCounter(){
     counter.textContent = `${opened.size} / ${STAGES.length} opened`;
   }
+  
   function save(){
-    localStorage.setItem(KEY, JSON.stringify(Array.from(opened)));
+    // No localStorage - just update counter
     updateCounter();
   }
+  
   function setActiveStop(i){
     [...stopsLayer.querySelectorAll(".stop")].forEach((b, j)=>{
       b.classList.toggle("active", j === i);
@@ -929,7 +931,6 @@ html = r"""
     const g = document.createElement("div");
     g.className = "giftFall";
     g.style.left = (Math.random()*100) + "vw";
-    // SLOWER: 8-12 seconds instead of 3.8-7.4
     g.style.animationDuration = (8 + Math.random()*4) + "s";
     g.innerHTML = GIFT_EMOJI[Math.floor(Math.random()*GIFT_EMOJI.length)];
     g.addEventListener("click", (e)=>{
@@ -939,10 +940,9 @@ html = r"""
       g.remove();
     });
     document.body.appendChild(g);
-    setTimeout(()=> g.remove(), 14000); // Keep longer before auto-remove
+    setTimeout(()=> g.remove(), 14000);
   }
   
-  // Spawn gifts less frequently - every 1.5 seconds
   setInterval(spawnFallingGift, 1500);
 
   // Init
@@ -961,10 +961,4 @@ html = r"""
 html = html.replace("__PAYLOAD__", payload_json)
 st.components.v1.html(html, height=880, scrolling=False)
 
-st.info(
-    "💝 **Meera & Zeel's Love River Flight**\n\n"
-    "• 👆 Click the **GOLD numbered circles** on the map (1-12)\n"
-    "• ✈️ Watch the **plane fly** to each station\n"
-    "• 📸 Each stop opens a **memory with photo**\n"
-    "• 🎁 Click **falling gifts** (slower now!) for surprise love wishes"
-)
+# NO BOTTOM NOTE - removed completely
