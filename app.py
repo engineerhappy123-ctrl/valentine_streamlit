@@ -181,6 +181,7 @@ html = f"""
     transition: left .55s ease;
     font-size:18px;
     filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+    z-index: 5;
   }}
 
   /* Horizontal journey */
@@ -192,6 +193,7 @@ html = f"""
     padding: 10px 14px 18px;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }}
   .journey::-webkit-scrollbar{{ height:10px; }}
   .journey::-webkit-scrollbar-thumb{{ background: rgba(255,255,255,.18); border-radius:999px; }}
@@ -434,6 +436,7 @@ html = f"""
     const card = document.createElement("div");
     card.className = "stage";
     card.dataset.stageId = s.id;
+    card.dataset.index = idx;
 
     const top = document.createElement("div");
     top.className = "row";
@@ -497,14 +500,45 @@ html = f"""
     updateHUD();
   }}
 
+  // Track which stage is visible and move plane to it
+  function updatePlanePosition() {{
+    const stages = journey.querySelectorAll('.stage');
+    let visibleIndex = 0;
+    const journeyRect = journey.getBoundingClientRect();
+    const centerX = journeyRect.left + journeyRect.width / 2;
+    
+    stages.forEach((stage, idx) => {{
+      const rect = stage.getBoundingClientRect();
+      if (rect.left <= centerX && rect.right >= centerX) {{
+        visibleIndex = idx;
+      }}
+    }});
+    
+    // Move plane to match progress based on visible stage
+    const total = STAGES.length;
+    const pct = total === 0 ? 0 : Math.round((visibleIndex / (total - 1)) * 100);
+    plane.style.left = pct + "%";
+    plane.textContent = pct >= 100 ? "🛬" : "✈️";
+  }}
+
   // Controls
-  document.getElementById("left").addEventListener("click", ()=> journey.scrollBy({{left:-360, behavior:"smooth"}}));
-  document.getElementById("right").addEventListener("click", ()=> journey.scrollBy({{left:360, behavior:"smooth"}}));
+  document.getElementById("left").addEventListener("click", ()=> {{
+    journey.scrollBy({{left:-360, behavior:"smooth"}});
+    setTimeout(updatePlanePosition, 600);
+  }});
+  document.getElementById("right").addEventListener("click", ()=> {{
+    journey.scrollBy({{left:360, behavior:"smooth"}});
+    setTimeout(updatePlanePosition, 600);
+  }});
   document.getElementById("reset").addEventListener("click", ()=> {{
     localStorage.removeItem(KEY);
     opened = new Set();
     build();
+    setTimeout(updatePlanePosition, 100);
   }});
+
+  // Update plane position on scroll
+  journey.addEventListener('scroll', updatePlanePosition);
 
   // Background slideshow
   const bgA = document.getElementById("bgA");
@@ -527,6 +561,7 @@ html = f"""
   }}
 
   build();
+  setTimeout(updatePlanePosition, 200);
   nextBg();
   setInterval(nextBg, 6500);
 </script>
