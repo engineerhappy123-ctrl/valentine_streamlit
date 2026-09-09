@@ -168,7 +168,6 @@ html = f"""
     100% {{ transform: translateX(50%); }}
   }}
 
-  /* HUD */
   .hud{{
     position:fixed; left: 14px; right:14px; top:12px;
     z-index:30;
@@ -184,11 +183,6 @@ html = f"""
     display:flex; gap:10px; align-items:center;
     min-height: 44px;
     white-space: nowrap;
-  }}
-  .brand{{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
   }}
   .brandTop{{
     font-weight: 980;
@@ -211,7 +205,6 @@ html = f"""
     z-index:2;
   }}
 
-  /* MAP box */
   .map{{
     flex:1;
     position:relative;
@@ -229,11 +222,11 @@ html = f"""
     pointer-events:none;
   }}
 
-  /* STOPS - SUPER VISIBLE */
+  /* STOPS - VERY VISIBLE WITH BIG NUMBERS */
   .stop{{
     position:absolute;
-    width: 56px; 
-    height: 56px;
+    width: 60px; 
+    height: 60px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     display:flex;
@@ -244,40 +237,27 @@ html = f"""
     background: radial-gradient(circle at 30% 30%, #ffffff, #f5e6d0);
     border: 4px solid #ffd700;
     box-shadow: 
-      0 0 30px rgba(255, 215, 0, 0.6),
-      0 0 60px rgba(255, 215, 0, 0.3),
-      inset 0 2px 10px rgba(255,215,0,0.2);
+      0 0 40px rgba(255, 215, 0, 0.8),
+      0 0 80px rgba(255, 215, 0, 0.4),
+      inset 0 2px 10px rgba(255,215,0,0.3);
     transition: all 0.3s ease;
     z-index:15;
     font-weight: 900;
     color: #4a1a2a;
-    font-size: 18px;
+    font-size: 22px;
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
   }}
-  .stop::before {{
-    content: '';
-    position: absolute;
-    inset: -10px;
-    border-radius: 50%;
-    background: rgba(255, 215, 0, 0.15);
-    animation: pulse 2s ease-in-out infinite;
-    z-index: -1;
-  }}
-  @keyframes pulse {{
-    0%, 100% {{ transform: scale(1); opacity: 0.5; }}
-    50% {{ transform: scale(1.4); opacity: 0.1; }}
-  }}
   .stop:hover{{ 
-    transform: translate(-50%, -50%) scale(1.2); 
+    transform: translate(-50%, -50%) scale(1.25); 
     box-shadow: 
-      0 0 50px rgba(255, 215, 0, 0.8),
-      0 0 80px rgba(255, 215, 0, 0.4);
+      0 0 60px rgba(255, 215, 0, 1),
+      0 0 100px rgba(255, 215, 0, 0.6);
     border-color: #ffaa00;
     z-index:20;
   }}
   .stop .n{{ 
     font-weight: 900; 
-    font-size: 20px; 
+    font-size: 22px; 
     color: #4a1a2a;
     z-index:2;
     position:relative;
@@ -285,41 +265,41 @@ html = f"""
   .stop.active{{ 
     border-color: #ff1493;
     box-shadow: 
-      0 0 40px rgba(255, 20, 147, 0.7),
-      0 0 80px rgba(255, 20, 147, 0.3);
-    transform: translate(-50%, -50%) scale(1.15);
+      0 0 50px rgba(255, 20, 147, 0.8),
+      0 0 100px rgba(255, 20, 147, 0.4);
+    transform: translate(-50%, -50%) scale(1.2);
     background: radial-gradient(circle, #fff5f5, #ffe0e8);
   }}
   .stop.opened{{ 
     border-color: #4CAF50;
     background: radial-gradient(circle, #f0fff0, #e8f5e9);
     box-shadow: 
-      0 0 40px rgba(76, 175, 80, 0.5),
-      0 0 80px rgba(76, 175, 80, 0.2);
+      0 0 40px rgba(76, 175, 80, 0.6),
+      0 0 80px rgba(76, 175, 80, 0.3);
   }}
   .stop.opened::after {{
     content: '✓';
     position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 14px;
+    top: -12px;
+    right: -12px;
+    font-size: 16px;
     background: #4CAF50;
     color: white;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.5);
     border: 2px solid white;
   }}
 
   .hint{{
     position:absolute;
     left: 50%;
-    top: -48px;
+    top: -50px;
     transform: translateX(-50%);
     background: rgba(0,0,0,0.9);
     border: 1px solid rgba(255,255,255,0.2);
@@ -337,10 +317,9 @@ html = f"""
   }}
   .stop:hover .hint{{ opacity: 1; }}
 
-  /* Plane */
   .plane{{
     position:absolute;
-    font-size: 44px;
+    font-size: 48px;
     transform: translate(-50%, -50%);
     z-index: 20;
     filter: drop-shadow(0 18px 30px rgba(255,200,100,0.5));
@@ -349,14 +328,12 @@ html = f"""
     pointer-events:none;
   }}
 
-  /* Bottom bar */
   .bar{{
     background: rgba(255,255,255,.15);
     border: 1px solid rgba(255,255,255,.25);
     border-radius: 18px;
     padding: 10px 12px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 14px 50px rgba(170, 40, 95, .08);
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -403,7 +380,6 @@ html = f"""
     to  {{ transform: translateX(-50%) translateY(130vh) rotate(360deg); }}
   }}
 
-  /* blast particles */
   .burst{{
     position:fixed;
     pointer-events:none;
@@ -506,7 +482,6 @@ html = f"""
     .midImg{{ height: clamp(250px, 36vh, 350px); }}
   }}
 
-  /* Wish Envelope */
   .wishBack{{
     position:fixed; inset:0;
     display:none;
@@ -553,7 +528,6 @@ html = f"""
 </head>
 
 <body>
-  <!-- BACKGROUND WAVES -->
   <div class="waves-container">
     <div class="wave"></div>
     <div class="wave"></div>
@@ -562,9 +536,9 @@ html = f"""
 
   <div class="hud">
     <div class="pill">
-      <div class="brand">
+      <div>
         <div class="brandTop">✈️ Meera ❤ Zeel — Love River Flight</div>
-        <div class="brandSub">Click on gold station dots • Plane flies to each stop</div>
+        <div class="brandSub">👆 Click the GOLD numbered dots on the map!</div>
       </div>
     </div>
     <div class="pill">
@@ -575,48 +549,33 @@ html = f"""
   <div class="wrap">
     <div class="map" id="map">
       <svg class="riverSvg" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M50,5
-                 C30,12 72,18 50,25
-                 C28,32 74,40 52,48
-                 C30,56 70,63 50,72
-                 C30,80 72,88 50,95"
+        <path d="M50,5 C30,12 72,18 50,25 C28,32 74,40 52,48 C30,56 70,63 50,72 C30,80 72,88 50,95"
               fill="none" stroke="rgba(255,255,255,.40)" stroke-width="12" stroke-linecap="round"/>
-        <path d="M50,5
-                 C30,12 72,18 50,25
-                 C28,32 74,40 52,48
-                 C30,56 70,63 50,72
-                 C30,80 72,88 50,95"
+        <path d="M50,5 C30,12 72,18 50,25 C28,32 74,40 52,48 C30,56 70,63 50,72 C30,80 72,88 50,95"
               fill="none" stroke="rgba(115, 205, 255, .40)" stroke-width="8" stroke-linecap="round"/>
-        <path d="M50,5
-                 C30,12 72,18 50,25
-                 C28,32 74,40 52,48
-                 C30,56 70,63 50,72
-                 C30,80 72,88 50,95"
-              fill="none" stroke="rgba(255,255,255,.40)" stroke-width="1.3" stroke-dasharray="3 4" stroke-linecap="round"/>
       </svg>
 
       <div class="plane" id="plane">✈️</div>
       <div id="stopsLayer"></div>
       
-      <!-- DEBUG: Show message if no stops -->
-      <div id="debugMsg" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.5);font-size:12px;z-index:5;background:rgba(0,0,0,0.5);padding:4px 12px;border-radius:999px;">
-        Loading stations...
+      <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:11px;z-index:5;background:rgba(0,0,0,0.4);padding:4px 12px;border-radius:999px;pointer-events:none;" id="statusMsg">
+        ⭐ Click gold dots to fly!
       </div>
     </div>
 
     <div class="bar">
       <div>
         <div class="nowTitle" id="nowTitle">📍 Stop 1: Instagram Request 💌</div>
-        <div class="nowSub" id="nowSub">✨ Click any gold dot to fly there</div>
+        <div class="nowSub" id="nowSub">✨ Click any gold dot on the map above</div>
       </div>
-      <div class="tiny" style="font-size:14px; background:rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px;">
+      <div style="font-size:13px; background:rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px; color:rgba(255,255,255,0.9);">
         🎁 Click falling gifts!
       </div>
     </div>
   </div>
 
   <div class="overlay" id="overlay">
-    <div class="card" id="card">
+    <div class="card">
       <div class="cardTop">
         <div style="display:flex; gap:10px; align-items:center;">
           <div class="date" id="cDate"></div>
@@ -624,13 +583,11 @@ html = f"""
         </div>
         <button class="x" id="close">✕</button>
       </div>
-
       <div class="cardBody">
         <div class="photo3d" id="photo3d">
           <img class="midImg" id="cImg" src="" alt="memory"/>
           <div class="shine" id="shine"></div>
         </div>
-
         <div class="info">
           <div class="head" id="cHead"></div>
           <div class="desc" id="cDesc"></div>
@@ -659,18 +616,16 @@ html = f"""
   const STAGES = {payload_json};
 
   const WISHES = [
-    "Happy Valentine's Day! 💖 You two are the cutest love story — keep choosing each other every day.",
-    "Your bond feels like home 🏡💞. May your love stay soft, silly, and strong forever.",
-    "To Meera ❤ Zeel: May your smiles stay in sync and your hearts stay in one team 💘",
-    "Love is not perfect — it's beautiful because you both try 💗 Happy Valentine's Day!",
-    "You both are the kind of couple that makes love look easy 😄💖 Stay happy always!",
+    "Happy Valentine's Day! 💖 You two are the cutest love story!",
+    "Your bond feels like home 🏡💞 May your love stay strong forever!",
+    "To Meera ❤ Zeel: May your smiles stay in sync 💘",
+    "Love is beautiful because you both try 💗 Happy Valentine's Day!",
+    "You both make love look easy 😄💖 Stay happy always!",
     "From first meet to forever vibes ✨💘 Keep flying together!",
     "May your love be sweet like chocolate 🍫 and warm like hugs 🤗💗",
-    "Two hearts, one beautiful journey 💕 Keep soaring high together!",
-    "Every love story is beautiful, but yours is my favorite ❤️",
-    "May your love shine brighter than all the stars ✨🌟"
+    "Two hearts, one beautiful journey 💕 Keep soaring high!"
   ];
-  const GIFT_EMOJI = ["🎁","💝","🎁","💝","🎀","💕","❤️"];
+  const GIFT_EMOJI = ["🎁","💝","🎁","💝","🎀","💕"];
 
   const KEY = "mz_love_river_v3";
   let opened = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
@@ -680,7 +635,7 @@ html = f"""
   const nowSub = document.getElementById("nowSub");
   const stopsLayer = document.getElementById("stopsLayer");
   const plane = document.getElementById("plane");
-  const debugMsg = document.getElementById("debugMsg");
+  const statusMsg = document.getElementById("statusMsg");
 
   const overlay = document.getElementById("overlay");
   const closeBtn = document.getElementById("close");
@@ -689,30 +644,18 @@ html = f"""
   const cSmall = document.getElementById("cSmall");
   const cHead = document.getElementById("cHead");
   const cDesc = document.getElementById("cDesc");
-
   const photo3d = document.getElementById("photo3d");
   const shine = document.getElementById("shine");
-
   const wishBack = document.getElementById("wishBack");
   const wishClose = document.getElementById("wishClose");
   const wishL1 = document.getElementById("wishL1");
   const wishL2 = document.getElementById("wishL2");
 
-  // STATION POSITIONS
   const POS = [
-    {{x:50, y:8}},
-    {{x:35, y:16}},
-    {{x:60, y:25}},
-    {{x:40, y:34}},
-    {{x:63, y:43}},
-    {{x:45, y:52}},
-    {{x:65, y:60}},
-    {{x:42, y:68}},
-    {{x:60, y:76}},
-    {{x:40, y:83}},
-    {{x:62, y:88}},
-    {{x:50, y:93}},
-    {{x:55, y:97}},
+    {{x:50, y:8}}, {{x:35, y:16}}, {{x:60, y:25}}, {{x:40, y:34}},
+    {{x:63, y:43}}, {{x:45, y:52}}, {{x:65, y:60}}, {{x:42, y:68}},
+    {{x:60, y:76}}, {{x:40, y:83}}, {{x:62, y:88}}, {{x:50, y:93}},
+    {{x:55, y:97}}
   ].slice(0, STAGES.length);
 
   let idx = 0;
@@ -720,9 +663,7 @@ html = f"""
   let anim = null;
 
   function updateCounter(){{
-    const total = STAGES.length;
-    const openedCount = opened.size;
-    counter.textContent = `${{openedCount}} / ${{total}} opened`;
+    counter.textContent = `${{opened.size}} / ${{STAGES.length}} opened`;
   }}
   
   function save(){{
@@ -731,7 +672,7 @@ html = f"""
   }}
   
   function setActiveStop(i){{
-    [...stopsLayer.querySelectorAll(".stop")].forEach((b, j)=>{{
+    document.querySelectorAll(".stop").forEach((b, j)=>{{
       b.classList.toggle("active", j === i);
     }});
   }}
@@ -740,19 +681,15 @@ html = f"""
   
   function openMemory(){{
     const s = STAGES[idx];
-
     opened.add(s.id);
     save();
-
-    const btns = stopsLayer.querySelectorAll(".stop");
+    const btns = document.querySelectorAll(".stop");
     if(btns[idx]) btns[idx].classList.add("opened");
-
     cImg.src = s.img || "";
     cDate.textContent = s.date;
     cSmall.textContent = `Stage ${{idx+1}} / ${{STAGES.length}}`;
     cHead.textContent = s.title;
     cDesc.textContent = s.desc;
-
     overlay.style.display = "flex";
   }}
   
@@ -761,50 +698,33 @@ html = f"""
 
   function flyTo(targetIdx, openAfter=false){{
     targetIdx = Math.max(0, Math.min(STAGES.length-1, targetIdx));
-
-    if(targetIdx === idx){{
-      if(openAfter) openMemory();
-      return;
-    }}
-
+    if(targetIdx === idx){{ if(openAfter) openMemory(); return; }}
     const from = {{x: planePos.x, y: planePos.y}};
     const to = POS[targetIdx];
-
     if(anim) cancelAnimationFrame(anim);
-
     idx = targetIdx;
     setActiveStop(idx);
-
     const s = STAGES[idx];
     nowTitle.textContent = `📍 Stop ${{idx+1}}: ${{s.title}}`;
     nowSub.textContent = s.date;
-
     const dx = (to.x - from.x), dy = (to.y - from.y);
     const dist = Math.sqrt(dx*dx + dy*dy);
     const dur = Math.min(1250, Math.max(650, dist * 26));
     const start = performance.now();
     const ease = (t) => 1 - Math.pow(1 - t, 3);
     const arc = Math.max(1.8, Math.min(6, dist/5));
-
     function step(now){{
       const t = Math.min(1, (now - start) / dur);
       const e = ease(t);
-
       const x = from.x + (to.x - from.x) * e;
       const y = from.y + (to.y - from.y) * e - Math.sin(Math.PI * e) * arc;
-
       plane.style.left = x + "%";
       plane.style.top  = y + "%";
-
-      if(t < 1){{
-        anim = requestAnimationFrame(step);
-      }}else{{
-        planePos = {{x: to.x, y: to.y}};
+      if(t < 1){{ anim = requestAnimationFrame(step); }}
+      else{{ planePos = {{x: to.x, y: to.y}};
         plane.style.left = to.x + "%";
         plane.style.top  = to.y + "%";
-        if(openAfter){{
-          setTimeout(()=> openMemory(), 300);
-        }}
+        if(openAfter){{ setTimeout(()=> openMemory(), 300); }}
       }}
     }}
     anim = requestAnimationFrame(step);
@@ -812,46 +732,29 @@ html = f"""
 
   function buildStops(){{
     stopsLayer.innerHTML = "";
-    debugMsg.textContent = `Creating ${{STAGES.length}} stations...`;
-    
+    statusMsg.textContent = `⭐ Creating ${{STAGES.length}} stations...`;
     STAGES.forEach((s, i)=>{{
       const p = POS[i];
       const b = document.createElement("div");
       b.className = "stop" + (opened.has(s.id) ? " opened" : "");
       b.style.left = p.x + "%";
       b.style.top  = p.y + "%";
-      b.innerHTML = `
-        <div class="hint">${{s.date}} • ${{s.title}}</div>
-        <div class="n">${{i+1}}</div>
-      `;
-      b.addEventListener("click", (e)=>{{
-        e.stopPropagation();
-        closeMemory();
-        flyTo(i, true);
-      }});
+      b.innerHTML = `<div class="hint">${{s.date}} • ${{s.title}}</div><div class="n">${{i+1}}</div>`;
+      b.addEventListener("click", (e)=>{{ e.stopPropagation(); closeMemory(); flyTo(i, true); }});
       stopsLayer.appendChild(b);
     }});
-    
-    debugMsg.textContent = `${{STAGES.length}} stations ready! Click gold dots ✨`;
-    setTimeout(() => {{ debugMsg.style.opacity = '0'; }}, 3000);
-    
+    statusMsg.textContent = `⭐ ${{STAGES.length}} gold dots ready! Click any to fly!`;
+    setTimeout(()=>{{ statusMsg.style.opacity = '0.6'; }}, 2000);
     updateCounter();
     setActiveStop(0);
   }}
 
-  function resetTilt(){{
-    photo3d.style.transform = "rotateX(0deg) rotateY(0deg)";
-    shine.style.setProperty("--mx", "50%");
-    shine.style.setProperty("--my", "30%");
-  }}
-  
+  function resetTilt(){{ photo3d.style.transform = "rotateX(0deg) rotateY(0deg)"; shine.style.setProperty("--mx", "50%"); shine.style.setProperty("--my", "30%"); }}
   photo3d.addEventListener("mousemove", (e)=>{{
     const r = photo3d.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width;
     const y = (e.clientY - r.top) / r.height;
-    const rotY = (x - 0.5) * 14;
-    const rotX = (0.5 - y) * 10;
-    photo3d.style.transform = `rotateX(${{rotX}}deg) rotateY(${{rotY}}deg)`;
+    photo3d.style.transform = `rotateX(${{(0.5 - y) * 10}}deg) rotateY(${{(x - 0.5) * 14}}deg)`;
     shine.style.setProperty("--mx", (x*100).toFixed(1) + "%");
     shine.style.setProperty("--my", (y*100).toFixed(1) + "%");
   }});
@@ -862,13 +765,12 @@ html = f"""
     wishL2.textContent = WISHES[Math.floor(Math.random()*WISHES.length)];
     wishBack.style.display = "flex";
   }}
-  
   function closeWish(){{ wishBack.style.display = "none"; }}
   wishClose.addEventListener("click", closeWish);
   wishBack.addEventListener("click", (e)={{ if(e.target === wishBack) closeWish(); }});
 
   function blastAt(clientX, clientY){{
-    const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bb5", "#a66bff", "#ff9f43", "#00d2d3"];
+    const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bb5", "#a66bff"];
     for(let i=0;i<30;i++){{
       const p = document.createElement("div");
       p.className = "burst";
@@ -881,7 +783,6 @@ html = f"""
       p.style.background = colors[Math.floor(Math.random() * colors.length)];
       p.style.width = (6 + Math.random() * 10) + "px";
       p.style.height = p.style.width;
-      p.style.boxShadow = `0 0 20px ${{colors[Math.floor(Math.random() * colors.length)]}}40`;
       document.body.appendChild(p);
       setTimeout(()=> p.remove(), 900);
     }}
@@ -893,20 +794,14 @@ html = f"""
     g.style.left = (Math.random()*100) + "vw";
     g.style.animationDuration = (4 + Math.random()*4) + "s";
     g.innerHTML = GIFT_EMOJI[Math.floor(Math.random()*GIFT_EMOJI.length)];
-    g.addEventListener("click", (e)=>{{
-      e.stopPropagation();
-      blastAt(e.clientX, e.clientY);
-      openWish();
-      g.remove();
-    }});
+    g.addEventListener("click", (e)=>{{ e.stopPropagation(); blastAt(e.clientX, e.clientY); openWish(); g.remove(); }});
     document.body.appendChild(g);
     setTimeout(()=> g.remove(), 9000);
   }}
   
-  // Spawn gifts every 500ms
   setInterval(spawnFallingGift, 500);
 
-  // Init - build stops after a small delay to ensure DOM is ready
+  // Build everything
   setTimeout(() => {{
     buildStops();
     plane.style.left = planePos.x + "%";
@@ -925,9 +820,8 @@ st.components.v1.html(html, height=780, scrolling=False)
 
 st.info(
     "💝 **Meera & Zeel's Love River Flight**\n\n"
-    "• Click on the **gold numbered dots** (1-13) along the river\n"
-    "• Watch the **plane fly** to each station\n"
-    "• Each stop opens a **memory with photo**\n"
-    "• Click **falling gifts** for surprise love wishes\n"
-    "• Gold dots pulse to help you find them ✨"
+    "• 👆 Click the **GOLD numbered circles** on the map (1-13)\n"
+    "• ✈️ Watch the **plane fly** to each station\n"
+    "• 📸 Each stop opens a **memory with photo**\n"
+    "• 🎁 Click **falling gifts** for surprise love wishes"
 )
