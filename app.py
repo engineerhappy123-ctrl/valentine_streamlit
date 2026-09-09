@@ -275,54 +275,75 @@ html = f"""
     opacity: .95;
   }}
 
-  /* Stops */
+  /* Stops - BIGGER AND MORE VISIBLE */
   .stop{{
     position:absolute;
-    width: 44px; height:44px;
+    width: 56px; 
+    height: 56px;
     border-radius: 999px;
     transform: translate(-50%, -50%);
     display:grid;
     place-items:center;
     cursor:pointer;
     user-select:none;
-    background: rgba(255,255,255,.78);
-    border: 1px solid rgba(255,255,255,.92);
-    box-shadow: 0 16px 40px rgba(160, 50, 100, .10);
-    transition: transform .15s ease, background .15s ease, outline .15s ease;
-    z-index:5;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid rgba(255, 200, 100, 0.8);
+    box-shadow: 0 0 30px rgba(255, 200, 100, 0.4), 0 16px 40px rgba(0,0,0,0.3);
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index:10;
+    font-weight: 900;
+    color: rgba(70, 20, 50, 0.95);
   }}
-  .stop:hover{{ transform: translate(-50%, -50%) scale(1.06); background: rgba(255,255,255,.92); }}
-  .stop .n{{ font-weight: 980; font-size: 12px; color: rgba(70, 20, 50, .92); }}
-  .stop.active{{ outline: 4px solid rgba(255, 0, 90, .14); background: rgba(255,255,255,.98); }}
-  .stop.opened{{ border-color: rgba(255,0,90,.20); background: rgba(255,245,252,.98); }}
+  .stop:hover{{ 
+    transform: translate(-50%, -50%) scale(1.15); 
+    box-shadow: 0 0 50px rgba(255, 200, 100, 0.6), 0 16px 40px rgba(0,0,0,0.4);
+  }}
+  .stop .n{{ 
+    font-weight: 900; 
+    font-size: 16px; 
+    color: rgba(70, 20, 50, 0.95);
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+  }}
+  .stop.active{{ 
+    border-color: rgba(255, 0, 90, 0.8);
+    box-shadow: 0 0 40px rgba(255, 0, 90, 0.5), 0 16px 40px rgba(0,0,0,0.3);
+    transform: translate(-50%, -50%) scale(1.1);
+  }}
+  .stop.opened{{ 
+    border-color: rgba(255, 215, 0, 0.9);
+    background: rgba(255, 245, 230, 0.98);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5), 0 16px 40px rgba(0,0,0,0.3);
+  }}
 
   .hint{{
     position:absolute;
     left: 50%;
-    top: -36px;
+    top: -44px;
     transform: translateX(-50%);
-    background: rgba(255,255,255,.95);
-    border: 1px solid rgba(255,255,255,.95);
-    padding: 6px 10px;
+    background: rgba(0,0,0,0.85);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 6px 12px;
     border-radius: 999px;
-    font-size: 12px;
-    color: rgba(75, 22, 55, .82);
+    font-size: 11px;
+    color: rgba(255,255,255,0.95);
     opacity: 0;
     white-space: nowrap;
-    transition: opacity .15s ease;
-    box-shadow: 0 12px 30px rgba(160,50,100,.10);
+    transition: opacity .2s ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     pointer-events:none;
+    font-weight: 600;
   }}
   .stop:hover .hint{{ opacity: 1; }}
 
-  /* Plane */
+  /* Plane - BIGGER */
   .plane{{
     position:absolute;
-    font-size: 34px;
+    font-size: 42px;
     transform: translate(-50%, -50%);
     z-index: 20;
-    filter: drop-shadow(0 18px 25px rgba(160,50,100,.10));
+    filter: drop-shadow(0 18px 25px rgba(255,200,100,0.3));
     will-change: left, top;
+    transition: none;
   }}
 
   /* Bottom bar */
@@ -339,26 +360,27 @@ html = f"""
     gap: 12px;
   }}
   .nowTitle{{
-    font-weight: 980;
-    font-size: 14px;
-    padding: 6px 12px;
+    font-weight: 900;
+    font-size: 15px;
+    padding: 8px 16px;
     border-radius: 999px;
-    background: rgba(255,255,255,.86);
+    background: rgba(255,255,255,.9);
     border: 1px solid rgba(255,255,255,.95);
     width: fit-content;
     color: rgba(65, 15, 40, .95);
   }}
-  .nowSub{{ font-size: 12px; color: rgba(200,220,255,0.8); }}
+  .nowSub{{ font-size: 13px; color: rgba(200,220,255,0.9); font-weight: 600; }}
 
   /* Falling gifts */
   .giftFall{{
     position:fixed;
     top:-70px;
-    width: 46px; height: 46px;
+    width: 50px; 
+    height: 50px;
     border-radius: 16px;
-    background: rgba(255,255,255,.86);
-    border: 1px solid rgba(255,255,255,.94);
-    box-shadow: 0 16px 40px rgba(160,50,100,.08);
+    background: rgba(255,255,255,.9);
+    border: 2px solid rgba(255,215,0,0.6);
+    box-shadow: 0 16px 40px rgba(255,200,100,0.2);
     display:grid;
     place-items:center;
     z-index: 60;
@@ -366,26 +388,31 @@ html = f"""
     user-select:none;
     animation: fall linear forwards;
     transform: translateX(-50%);
+    font-size: 24px;
+  }}
+  .giftFall:hover{{
+    transform: translateX(-50%) scale(1.1);
   }}
   @keyframes fall{{
     from{{ transform: translateX(-50%) translateY(0) rotate(0deg); }}
-    to  {{ transform: translateX(-50%) translateY(130vh) rotate(14deg); }}
+    to  {{ transform: translateX(-50%) translateY(130vh) rotate(360deg); }}
   }}
 
   /* blast particles */
   .burst{{
     position:fixed;
-    width: 10px; height: 10px;
-    border-radius: 999px;
+    width: 12px; 
+    height: 12px;
+    border-radius: 50%;
     background: rgba(255,0,90,.85);
-    box-shadow: 0 0 10px rgba(255,0,90,.28);
+    box-shadow: 0 0 20px rgba(255,0,90,.4);
     pointer-events:none;
     z-index: 500;
     animation: burst .85s ease forwards;
   }}
   @keyframes burst{{
     from{{ transform: translate(-50%,-50%) scale(.7); opacity: .95; }}
-    to  {{ transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2); opacity: 0; }}
+    to  {{ transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; }}
   }}
 
   /* Memory overlay */
@@ -393,7 +420,7 @@ html = f"""
     position:fixed; inset:0;
     display:none;
     align-items:center; justify-content:center;
-    background: rgba(10, 20, 40, .6);
+    background: rgba(10, 20, 40, .7);
     backdrop-filter: blur(10px);
     z-index: 120;
     padding: 18px;
@@ -401,7 +428,7 @@ html = f"""
   .card{{
     width: min(880px, 96vw);
     border-radius: 26px;
-    background: rgba(255,255,255,.82);
+    background: rgba(255,255,255,.92);
     border: 1px solid rgba(255,255,255,.95);
     box-shadow: 0 22px 90px rgba(160, 50, 100, .14);
     overflow:hidden;
@@ -423,7 +450,7 @@ html = f"""
     background: rgba(255,255,255,.86);
     color: rgba(65, 15, 40, .95);
     padding: 8px 12px;
-    font-weight: 980;
+    font-weight: 900;
   }}
 
   .cardBody{{
@@ -470,7 +497,7 @@ html = f"""
     font-size: 12px;
     color: rgba(105, 30, 70, .72);
   }}
-  .head{{ font-size: 24px; font-weight: 980; line-height: 1.08; color: rgba(65,15,40,.95); }}
+  .head{{ font-size: 24px; font-weight: 900; line-height: 1.08; color: rgba(65,15,40,.95); }}
   .desc{{ font-size: 14px; line-height: 1.6; color: rgba(85,25,55,.84); }}
 
   @media (max-width: 860px){{
@@ -483,7 +510,7 @@ html = f"""
     position:fixed; inset:0;
     display:none;
     align-items:center; justify-content:center;
-    background: rgba(10, 20, 40, .6);
+    background: rgba(10, 20, 40, .7);
     backdrop-filter: blur(10px);
     z-index: 200;
     padding: 18px;
@@ -491,7 +518,7 @@ html = f"""
   .envelope{{
     width: min(560px, 94vw);
     border-radius: 26px;
-    background: rgba(255,255,255,.86);
+    background: rgba(255,255,255,.92);
     border: 1px solid rgba(255,255,255,.95);
     box-shadow: 0 24px 90px rgba(160,50,100,.14);
     overflow:hidden;
@@ -506,7 +533,7 @@ html = f"""
     border-bottom: 1px solid rgba(255,255,255,.92);
   }}
   .envTitle{{
-    font-weight: 980;
+    font-weight: 900;
     color: rgba(65,15,40,.92);
     display:flex; gap:8px; align-items:center;
   }}
@@ -519,7 +546,7 @@ html = f"""
     color: rgba(65,15,40,.90);
     box-shadow: 0 14px 40px rgba(160,50,100,.08);
   }}
-  .wishLine1{{ font-weight: 980; font-size: 16px; }}
+  .wishLine1{{ font-weight: 900; font-size: 16px; }}
   .wishLine2{{ margin-top: 8px; font-size: 14px; line-height: 1.6; color: rgba(85,25,55,.84); }}
 </style>
 </head>
@@ -553,12 +580,12 @@ html = f"""
   <div class="hud">
     <div class="pill">
       <div class="brand">
-        <div class="brandTop">Let's Travel Love Story ✈️💖 — Meera ❤ Zeel</div>
-        <div class="brandSub">Tap any stop • gifts rain = surprise wishes</div>
+        <div class="brandTop">✈️ Meera ❤ Zeel — Love River Flight</div>
+        <div class="brandSub">Click on station dots • Plane flies • Gifts rain with wishes</div>
       </div>
     </div>
     <div class="pill">
-      <div class="tiny" id="counter">0 opened</div>
+      <div class="tiny" id="counter">0 / 13 opened</div>
     </div>
   </div>
 
@@ -591,10 +618,12 @@ html = f"""
 
     <div class="bar">
       <div>
-        <div class="nowTitle" id="nowTitle">Current: —</div>
-        <div class="nowSub" id="nowSub">Tap any stop</div>
+        <div class="nowTitle" id="nowTitle">📍 Stop 1: Instagram Request 💌</div>
+        <div class="nowSub" id="nowSub">Click any station dot to fly there ✈️</div>
       </div>
-      <div class="tiny">💝 Tap falling gifts too</div>
+      <div class="tiny" style="font-size:14px; background:rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px;">
+        🎁 Click falling gifts!
+      </div>
     </div>
   </div>
 
@@ -603,7 +632,7 @@ html = f"""
       <div class="cardTop">
         <div style="display:flex; gap:10px; align-items:center;">
           <div class="date" id="cDate"></div>
-          <div style="font-weight:980; color:rgba(65,15,40,.90);" id="cSmall"></div>
+          <div style="font-weight:900; color:rgba(65,15,40,.90);" id="cSmall"></div>
         </div>
         <button class="x" id="close">✕</button>
       </div>
@@ -617,7 +646,7 @@ html = f"""
         <div class="info">
           <div class="head" id="cHead"></div>
           <div class="desc" id="cDesc"></div>
-          <div class="tiny" style="margin-top:auto;">(tap outside to close)</div>
+          <div style="margin-top:auto; font-size:12px; color:rgba(85,25,55,.5);">(tap outside to close)</div>
         </div>
       </div>
     </div>
@@ -648,9 +677,12 @@ html = f"""
     "Love is not perfect — it's beautiful because you both try 💗 Happy Valentine's Day!",
     "You both are the kind of couple that makes love look easy 😄💖 Stay happy always!",
     "From first meet to forever vibes ✨💘 Keep flying together!",
-    "May your love be sweet like chocolate 🍫 and warm like hugs 🤗💗"
+    "May your love be sweet like chocolate 🍫 and warm like hugs 🤗💗",
+    "Two hearts, one beautiful journey 💕 Keep soaring high together!",
+    "Every love story is beautiful, but yours is my favorite ❤️",
+    "May your love shine brighter than all the stars ✨🌟"
   ];
-  const GIFT_EMOJI = ["🎁","💝","🎁","💝","🎀"];
+  const GIFT_EMOJI = ["🎁","💝","🎁","💝","🎀","💕","❤️"];
 
   const KEY = "mz_love_river_v3";
   let opened = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
@@ -680,16 +712,16 @@ html = f"""
 
   const POS = [
     {{x:50, y:8}},
-    {{x:40, y:15}},
-    {{x:58, y:22}},
-    {{x:44, y:30}},
-    {{x:62, y:38}},
-    {{x:48, y:46}},
-    {{x:64, y:54}},
-    {{x:46, y:62}},
-    {{x:60, y:70}},
-    {{x:45, y:78}},
-    {{x:62, y:86}},
+    {{x:38, y:16}},
+    {{x:58, y:24}},
+    {{x:42, y:33}},
+    {{x:62, y:42}},
+    {{x:46, y:50}},
+    {{x:64, y:58}},
+    {{x:44, y:66}},
+    {{x:60, y:74}},
+    {{x:43, y:82}},
+    {{x:62, y:88}},
     {{x:50, y:93}},
     {{x:55, y:97}},
   ].slice(0, STAGES.length);
@@ -699,12 +731,18 @@ html = f"""
   let anim = null;
 
   function updateCounter(){{
-    counter.textContent = `${{opened.size}} / ${{STAGES.length}} opened`;
+    const total = STAGES.length;
+    const openedCount = opened.size;
+    counter.textContent = `${{openedCount}} / ${{total}} opened`;
+    const pct = Math.round((openedCount/total)*100);
+    // Update progress if you want
   }}
+  
   function save(){{
     localStorage.setItem(KEY, JSON.stringify(Array.from(opened)));
     updateCounter();
   }}
+  
   function setActiveStop(i){{
     [...stopsLayer.querySelectorAll(".stop")].forEach((b, j)=>{{
       b.classList.toggle("active", j === i);
@@ -712,14 +750,15 @@ html = f"""
   }}
 
   function closeMemory(){{ overlay.style.display = "none"; }}
+  
   function openMemory(){{
     const s = STAGES[idx];
 
     opened.add(s.id);
     save();
 
-    const btn = stopsLayer.querySelectorAll(".stop")[idx];
-    if(btn) btn.classList.add("opened");
+    const btns = stopsLayer.querySelectorAll(".stop");
+    if(btns[idx]) btns[idx].classList.add("opened");
 
     cImg.src = s.img || "";
     cDate.textContent = s.date;
@@ -729,6 +768,7 @@ html = f"""
 
     overlay.style.display = "flex";
   }}
+  
   closeBtn.addEventListener("click", closeMemory);
   overlay.addEventListener("click", (e)={{ if(e.target === overlay) closeMemory(); }});
 
@@ -749,7 +789,7 @@ html = f"""
     setActiveStop(idx);
 
     const s = STAGES[idx];
-    nowTitle.textContent = `Current: Stop ${{idx+1}} — ${{s.title}}`;
+    nowTitle.textContent = `📍 Stop ${{idx+1}}: ${{s.title}}`;
     nowSub.textContent = s.date;
 
     const dx = (to.x - from.x), dy = (to.y - from.y);
@@ -776,7 +816,7 @@ html = f"""
         plane.style.left = to.x + "%";
         plane.style.top  = to.y + "%";
         if(openAfter){{
-          setTimeout(()=> openMemory(), 260);
+          setTimeout(()=> openMemory(), 300);
         }}
       }}
     }}
@@ -795,7 +835,8 @@ html = f"""
         <div class="hint">${{s.date}} • ${{s.title}}</div>
         <div class="n">${{i+1}}</div>
       `;
-      b.addEventListener("click", ()=>{{
+      b.addEventListener("click", (e)=>{{
+        e.stopPropagation();
         closeMemory();
         flyTo(i, true);
       }});
@@ -810,6 +851,7 @@ html = f"""
     shine.style.setProperty("--mx", "50%");
     shine.style.setProperty("--my", "30%");
   }}
+  
   photo3d.addEventListener("mousemove", (e)=>{{
     const r = photo3d.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width;
@@ -827,18 +869,25 @@ html = f"""
     wishL2.textContent = WISHES[Math.floor(Math.random()*WISHES.length)];
     wishBack.style.display = "flex";
   }}
+  
   function closeWish(){{ wishBack.style.display = "none"; }}
   wishClose.addEventListener("click", closeWish);
   wishBack.addEventListener("click", (e)={{ if(e.target === wishBack) closeWish(); }});
 
   function blastAt(clientX, clientY){{
-    for(let i=0;i<18;i++){{
+    const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bb5", "#a66bff", "#ff9f43"];
+    for(let i=0;i<24;i++){{
       const p = document.createElement("div");
       p.className = "burst";
+      const angle = (Math.PI * 2 * i) / 24;
+      const dist = 60 + Math.random() * 100;
       p.style.left = clientX + "px";
       p.style.top  = clientY + "px";
-      p.style.setProperty("--dx", ((Math.random()*260)-130) + "px");
-      p.style.setProperty("--dy", ((Math.random()*220)-110) + "px");
+      p.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+      p.style.setProperty("--dy", Math.sin(angle) * dist + "px");
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.width = (6 + Math.random() * 8) + "px";
+      p.style.height = p.style.width;
       document.body.appendChild(p);
       setTimeout(()=> p.remove(), 900);
     }}
@@ -848,8 +897,8 @@ html = f"""
     const g = document.createElement("div");
     g.className = "giftFall";
     g.style.left = (Math.random()*100) + "vw";
-    g.style.animationDuration = (3.8 + Math.random()*3.6) + "s";
-    g.innerHTML = `<div style="font-size:22px;">${{GIFT_EMOJI[Math.floor(Math.random()*GIFT_EMOJI.length)]}}</div>`;
+    g.style.animationDuration = (4 + Math.random()*4) + "s";
+    g.innerHTML = GIFT_EMOJI[Math.floor(Math.random()*GIFT_EMOJI.length)];
     g.addEventListener("click", (e)=>{{
       e.stopPropagation();
       blastAt(e.clientX, e.clientY);
@@ -859,13 +908,15 @@ html = f"""
     document.body.appendChild(g);
     setTimeout(()=> g.remove(), 9000);
   }}
-  setInterval(spawnFallingGift, 700);
+  
+  // Spawn gifts every 600ms
+  setInterval(spawnFallingGift, 600);
 
   // Init
   buildStops();
   plane.style.left = planePos.x + "%";
   plane.style.top  = planePos.y + "%";
-  nowTitle.textContent = `Current: Stop 1 — ${{STAGES[0].title}}`;
+  nowTitle.textContent = `📍 Stop 1: ${{STAGES[0].title}}`;
   nowSub.textContent = STAGES[0].date;
   resetTilt();
   updateCounter();
@@ -878,8 +929,9 @@ st.components.v1.html(html, height=780, scrolling=False)
 
 st.info(
     "💝 **Meera & Zeel's Love River Flight**\n\n"
-    "• Click on station dots to fly the plane\n"
-    "• Click on falling gifts for surprise wishes\n"
-    "• Each stop opens a memory with photo\n"
-    "• Beautiful light blue wave background"
+    "• Click on the numbered **station dots** (1-13) along the river\n"
+    "• Watch the **plane fly** to each station\n"
+    "• Each stop opens a **memory with photo**\n"
+    "• Click **falling gifts** for surprise love wishes\n"
+    "• Beautiful light blue wave background with hearts ✨"
 )
