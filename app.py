@@ -455,7 +455,6 @@ html = f"""
   h2 {{ margin:4px 0 0; font-size:17px; line-height:1.15; color:rgba(255,255,255,0.9); }}
   p {{ margin:0; color: rgba(255,255,255,0.6); font-size:12px; line-height:1.4; }}
 
-  /* Gift button */
   .gift-area {{
     margin-top:4px;
     display:flex;
