@@ -455,13 +455,13 @@ html = f"""
     const isOpen = opened.has(s.id);
 
     giftBtn.innerHTML = `
-      <div class="gift ${isOpen ? "opened" : ""}">
-        <div class="boxLid"></div>
-        <div class="boxBase"></div>
-        <div class="ribbonV"></div>
-        <div class="ribbonH"></div>
-        <div class="bow"><span></span><span></span></div>
-      </div>
+      <div class="gift ${" + isOpen + " ? "opened" : ""}">
+      <div class="boxLid"></div>
+      <div class="boxBase"></div>
+      <div class="ribbonV"></div>
+      <div class="ribbonH"></div>
+      <div class="bow"><span></span><span></span></div>
+     </div>
     `;
 
     const burst = document.createElement("div");
