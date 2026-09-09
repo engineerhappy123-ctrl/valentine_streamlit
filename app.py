@@ -608,7 +608,7 @@ html = f"""
     const isOpen = opened.has(s.id);
 
     giftBtn.innerHTML = `
-      <div class="gift ${isOpen ? "opened" : "falling"}">
+      <div class="gift ${{isOpen ? "opened" : "falling"}}">
         <div class="boxLid"></div>
         <div class="boxBase"></div>
         <div class="ribbonV"></div>
