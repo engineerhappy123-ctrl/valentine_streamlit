@@ -168,53 +168,6 @@ html = f"""
     100% {{ transform: translateX(50%); }}
   }}
 
-  /* Red glitter hearts */
-  .heart{{
-    position:fixed;
-    bottom:-40px;
-    opacity: 0;
-    z-index:1;
-    pointer-events:none;
-    animation: floatUp linear infinite;
-    filter: drop-shadow(0 10px 14px rgba(0,0,0,.10));
-  }}
-  .heart::after{{
-    content:"❤";
-    display:block;
-    background: linear-gradient(180deg, #ff0a54, #ff3d7f, #ff0a54);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow:
-      0 0 6px rgba(255,0,80,.45),
-      0 0 12px rgba(255,0,80,.18);
-  }}
-  @keyframes floatUp{{
-    0%   {{ transform: translateY(0) translateX(0) scale(.75) rotate(0deg); opacity: 0; }}
-    12%  {{ opacity: .88; }}
-    100% {{ transform: translateY(-125vh) translateX(var(--dx)) scale(1.35) rotate(18deg); opacity: 0; }}
-  }}
-
-  /* sparkles */
-  .spark{{
-    position:fixed;
-    width: 5px; height: 5px;
-    border-radius: 999px;
-    background: rgba(255, 40, 120, .85);
-    box-shadow:
-      0 0 10px rgba(255,0,90,.30),
-      0 0 18px rgba(255,0,90,.14);
-    opacity: 0;
-    z-index:1;
-    pointer-events:none;
-    animation: twinkle ease-in-out infinite;
-  }}
-  @keyframes twinkle{{
-    0%,100% {{ transform: scale(.7); opacity: 0; }}
-    45%     {{ opacity: .85; }}
-    60%     {{ transform: scale(1.35); opacity: .95; }}
-  }}
-
   /* HUD */
   .hud{{
     position:fixed; left: 14px; right:14px; top:12px;
@@ -276,11 +229,11 @@ html = f"""
     pointer-events:none;
   }}
 
-  /* STOPS - BIG, BRIGHT, VISIBLE */
+  /* STOPS - SUPER VISIBLE */
   .stop{{
     position:absolute;
-    width: 60px; 
-    height: 60px;
+    width: 56px; 
+    height: 56px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     display:flex;
@@ -288,14 +241,14 @@ html = f"""
     justify-content:center;
     cursor:pointer;
     user-select:none;
-    background: radial-gradient(circle, #ffffff, #f0e6d0);
+    background: radial-gradient(circle at 30% 30%, #ffffff, #f5e6d0);
     border: 4px solid #ffd700;
     box-shadow: 
       0 0 30px rgba(255, 215, 0, 0.6),
       0 0 60px rgba(255, 215, 0, 0.3),
       inset 0 2px 10px rgba(255,215,0,0.2);
     transition: all 0.3s ease;
-    z-index:10;
+    z-index:15;
     font-weight: 900;
     color: #4a1a2a;
     font-size: 18px;
@@ -304,15 +257,15 @@ html = f"""
   .stop::before {{
     content: '';
     position: absolute;
-    inset: -8px;
+    inset: -10px;
     border-radius: 50%;
-    background: rgba(255, 215, 0, 0.2);
+    background: rgba(255, 215, 0, 0.15);
     animation: pulse 2s ease-in-out infinite;
     z-index: -1;
   }}
   @keyframes pulse {{
     0%, 100% {{ transform: scale(1); opacity: 0.5; }}
-    50% {{ transform: scale(1.3); opacity: 0.2; }}
+    50% {{ transform: scale(1.4); opacity: 0.1; }}
   }}
   .stop:hover{{ 
     transform: translate(-50%, -50%) scale(1.2); 
@@ -320,7 +273,7 @@ html = f"""
       0 0 50px rgba(255, 215, 0, 0.8),
       0 0 80px rgba(255, 215, 0, 0.4);
     border-color: #ffaa00;
-    z-index:15;
+    z-index:20;
   }}
   .stop .n{{ 
     font-weight: 900; 
@@ -338,28 +291,29 @@ html = f"""
     background: radial-gradient(circle, #fff5f5, #ffe0e8);
   }}
   .stop.opened{{ 
-    border-color: #ff6b6b;
-    background: radial-gradient(circle, #fff5f5, #ffe8e8);
+    border-color: #4CAF50;
+    background: radial-gradient(circle, #f0fff0, #e8f5e9);
     box-shadow: 
-      0 0 40px rgba(255, 107, 107, 0.5),
-      0 0 80px rgba(255, 107, 107, 0.2);
+      0 0 40px rgba(76, 175, 80, 0.5),
+      0 0 80px rgba(76, 175, 80, 0.2);
   }}
   .stop.opened::after {{
     content: '✓';
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -10px;
+    right: -10px;
     font-size: 14px;
     background: #4CAF50;
     color: white;
     border-radius: 50%;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     box-shadow: 0 2px 10px rgba(76, 175, 80, 0.4);
+    border: 2px solid white;
   }}
 
   .hint{{
@@ -379,7 +333,7 @@ html = f"""
     box-shadow: 0 12px 30px rgba(0,0,0,0.5);
     pointer-events:none;
     font-weight: 600;
-    z-index:20;
+    z-index:25;
   }}
   .stop:hover .hint{{ opacity: 1; }}
 
@@ -599,30 +553,12 @@ html = f"""
 </head>
 
 <body>
-<script>
-  // hearts + sparkles
-  const heartCount = 56;
-  for(let i=0;i<heartCount;i++){{
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.style.left = (Math.random()*100) + "vw";
-    h.style.animationDuration = (6 + Math.random()*8) + "s";
-    h.style.fontSize = (14 + Math.random()*20) + "px";
-    h.style.setProperty("--dx", ((Math.random()*180)-90) + "px");
-    h.style.animationDelay = (Math.random()*6) + "s";
-    document.body.appendChild(h);
-  }}
-  const sparkCount = 34;
-  for(let i=0;i<sparkCount;i++){{
-    const s = document.createElement("div");
-    s.className = "spark";
-    s.style.left = (Math.random()*100) + "vw";
-    s.style.top  = (Math.random()*100) + "vh";
-    s.style.animationDuration = (2.0 + Math.random()*3.0) + "s";
-    s.style.animationDelay = (Math.random()*2.5) + "s";
-    document.body.appendChild(s);
-  }}
-</script>
+  <!-- BACKGROUND WAVES -->
+  <div class="waves-container">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
 
   <div class="hud">
     <div class="pill">
@@ -661,6 +597,11 @@ html = f"""
 
       <div class="plane" id="plane">✈️</div>
       <div id="stopsLayer"></div>
+      
+      <!-- DEBUG: Show message if no stops -->
+      <div id="debugMsg" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.5);font-size:12px;z-index:5;background:rgba(0,0,0,0.5);padding:4px 12px;border-radius:999px;">
+        Loading stations...
+      </div>
     </div>
 
     <div class="bar">
@@ -737,9 +678,9 @@ html = f"""
   const counter = document.getElementById("counter");
   const nowTitle = document.getElementById("nowTitle");
   const nowSub = document.getElementById("nowSub");
-
   const stopsLayer = document.getElementById("stopsLayer");
   const plane = document.getElementById("plane");
+  const debugMsg = document.getElementById("debugMsg");
 
   const overlay = document.getElementById("overlay");
   const closeBtn = document.getElementById("close");
@@ -757,7 +698,7 @@ html = f"""
   const wishL1 = document.getElementById("wishL1");
   const wishL2 = document.getElementById("wishL2");
 
-  // STATION POSITIONS - spread out along the river
+  // STATION POSITIONS
   const POS = [
     {{x:50, y:8}},
     {{x:35, y:16}},
@@ -871,6 +812,8 @@ html = f"""
 
   function buildStops(){{
     stopsLayer.innerHTML = "";
+    debugMsg.textContent = `Creating ${{STAGES.length}} stations...`;
+    
     STAGES.forEach((s, i)=>{{
       const p = POS[i];
       const b = document.createElement("div");
@@ -888,6 +831,10 @@ html = f"""
       }});
       stopsLayer.appendChild(b);
     }});
+    
+    debugMsg.textContent = `${{STAGES.length}} stations ready! Click gold dots ✨`;
+    setTimeout(() => {{ debugMsg.style.opacity = '0'; }}, 3000);
+    
     updateCounter();
     setActiveStop(0);
   }}
@@ -959,14 +906,16 @@ html = f"""
   // Spawn gifts every 500ms
   setInterval(spawnFallingGift, 500);
 
-  // Init
-  buildStops();
-  plane.style.left = planePos.x + "%";
-  plane.style.top  = planePos.y + "%";
-  nowTitle.textContent = `📍 Stop 1: ${{STAGES[0].title}}`;
-  nowSub.textContent = STAGES[0].date;
-  resetTilt();
-  updateCounter();
+  // Init - build stops after a small delay to ensure DOM is ready
+  setTimeout(() => {{
+    buildStops();
+    plane.style.left = planePos.x + "%";
+    plane.style.top  = planePos.y + "%";
+    nowTitle.textContent = `📍 Stop 1: ${{STAGES[0].title}}`;
+    nowSub.textContent = STAGES[0].date;
+    resetTilt();
+    updateCounter();
+  }}, 100);
 </script>
 </body>
 </html>
@@ -977,8 +926,8 @@ st.components.v1.html(html, height=780, scrolling=False)
 st.info(
     "💝 **Meera & Zeel's Love River Flight**\n\n"
     "• Click on the **gold numbered dots** (1-13) along the river\n"
-    "• Watch the **plane fly** to each station with smooth animation\n"
+    "• Watch the **plane fly** to each station\n"
     "• Each stop opens a **memory with photo**\n"
     "• Click **falling gifts** for surprise love wishes\n"
-    "• Beautiful light blue wave background with floating hearts ✨"
+    "• Gold dots pulse to help you find them ✨"
 )
