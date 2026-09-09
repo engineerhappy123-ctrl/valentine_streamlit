@@ -18,7 +18,7 @@ def to_data_uri(path: Path) -> str:
     return f"data:image/{mime};base64," + base64.b64encode(path.read_bytes()).decode("utf-8")
 
 # -----------------------
-# STAGES (26 Dec REMOVED)
+# STAGES (26 Dec REMOVED, Promise Bond REMOVED)
 # -----------------------
 stages = [
     {"id":"req","date":"(No date)","title":"Instagram Request 💌",
@@ -68,10 +68,6 @@ stages = [
     {"id":"apr6","date":"06 Apr 2024","title":"Unlimited + Real Paprika 🍕",
      "desc":"Real Paprika date — love story started ❤️",
      "ai":"ai_12_06apr.png"},
-
-    {"id":"promise","date":"After that ❤️","title":"Promise Bond 🤝💖",
-     "desc":"Best friends → future life partners",
-     "ai":"ai_13_promise.png"},
 ]
 
 # Optional: quick check
@@ -412,7 +408,7 @@ html = r"""
   }
   .nowSub{ font-size: 12px; color: rgba(105, 30, 70, .72); }
 
-  /* Falling gifts */
+  /* Falling gifts - SLOWER */
   .giftFall{
     position:fixed;
     top:-70px;
@@ -433,6 +429,7 @@ html = r"""
   .giftFall:hover{
     transform: translateX(-50%) scale(1.1);
   }
+  /* SLOWER FALL ANIMATION - 8-10 seconds */
   @keyframes fall{
     from{ transform: translateX(-50%) translateY(0) rotate(0deg); }
     to  { transform: translateX(-50%) translateY(130vh) rotate(360deg); }
@@ -765,7 +762,6 @@ html = r"""
     {x:45, y:78},
     {x:62, y:86},
     {x:50, y:93},
-    {x:55, y:97},
   ].slice(0, STAGES.length);
 
   // plane starts at side (left) so it never hides stop 1
@@ -928,12 +924,13 @@ html = r"""
     }
   }
 
-  // Many raining gifts
+  // SLOWER FALLING GIFTS - Longer animation duration (8-12 seconds)
   function spawnFallingGift(){
     const g = document.createElement("div");
     g.className = "giftFall";
     g.style.left = (Math.random()*100) + "vw";
-    g.style.animationDuration = (3.8 + Math.random()*3.6) + "s";
+    // SLOWER: 8-12 seconds instead of 3.8-7.4
+    g.style.animationDuration = (8 + Math.random()*4) + "s";
     g.innerHTML = GIFT_EMOJI[Math.floor(Math.random()*GIFT_EMOJI.length)];
     g.addEventListener("click", (e)=>{
       e.stopPropagation();
@@ -942,9 +939,11 @@ html = r"""
       g.remove();
     });
     document.body.appendChild(g);
-    setTimeout(()=> g.remove(), 9000);
+    setTimeout(()=> g.remove(), 14000); // Keep longer before auto-remove
   }
-  setInterval(spawnFallingGift, 600);
+  
+  // Spawn gifts less frequently - every 1.5 seconds
+  setInterval(spawnFallingGift, 1500);
 
   // Init
   buildStops();
@@ -964,8 +963,8 @@ st.components.v1.html(html, height=880, scrolling=False)
 
 st.info(
     "💝 **Meera & Zeel's Love River Flight**\n\n"
-    "• 👆 Click the **GOLD numbered circles** on the map (1-13)\n"
+    "• 👆 Click the **GOLD numbered circles** on the map (1-12)\n"
     "• ✈️ Watch the **plane fly** to each station\n"
     "• 📸 Each stop opens a **memory with photo**\n"
-    "• 🎁 Click **falling gifts** for surprise love wishes"
+    "• 🎁 Click **falling gifts** (slower now!) for surprise love wishes"
 )
