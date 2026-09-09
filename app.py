@@ -32,7 +32,7 @@ stages = [
     dict(id="d26",  date="26 Dec 2023", title="Second Date 😍",
          desc="Our second meet — more comfort, more smiles",
          ai="ai_02_26dec.png"),
-    dict(id="jan6", date="06 Jan 2024", title="Ajay’s Cafe ☕",
+    dict(id="jan6", date="06 Jan 2024", title="Ajay's Cafe ☕",
          desc="Coffee + talks + vibes",
          ai="ai_03_06jan.png"),
     dict(id="feb14",date="14 Feb 2024", title="Ahmedabad Gufa 💗",
@@ -45,7 +45,7 @@ stages = [
          desc="A sweet moment that changed everything",
          ai="ai_06_08mar.png"),
     dict(id="mar28",date="28 Mar 2024", title="Cheek Bite 😂",
-         desc="Funny-cute moment… Meera bit Zeel’s cheek",
+         desc="Funny-cute moment… Meera bit Zeel's cheek",
          ai="ai_07_28mar.png"),
     dict(id="mar29",date="29 Mar 2024", title="Bounce Up 🎉",
          desc="Meera + Zeel + Hiral + Ujjaval (Bounce Up)",
@@ -439,11 +439,11 @@ html = f"""
     top.className = "row";
     top.innerHTML = `
       <div>
-        <div class="badge">Stage ${idx+1} / ${STAGES.length}</div>
-        <h2>${s.title}</h2>
-        <p>${s.desc}</p>
+        <div class="badge">Stage ${{idx+1}} / ${{STAGES.length}}</div>
+        <h2>${{s.title}}</h2>
+        <p>${{s.desc}}</p>
       </div>
-      <div class="badge">${s.date}</div>
+      <div class="badge">${{s.date}}</div>
     `;
 
     const giftArea = document.createElement("div");
@@ -455,13 +455,13 @@ html = f"""
     const isOpen = opened.has(s.id);
 
     giftBtn.innerHTML = `
-      <div class="gift ${" + isOpen + " ? "opened" : ""}">
-      <div class="boxLid"></div>
-      <div class="boxBase"></div>
-      <div class="ribbonV"></div>
-      <div class="ribbonH"></div>
-      <div class="bow"><span></span><span></span></div>
-     </div>
+      <div class="gift ${{isOpen ? "opened" : ""}}">
+        <div class="boxLid"></div>
+        <div class="boxBase"></div>
+        <div class="ribbonV"></div>
+        <div class="ribbonH"></div>
+        <div class="bow"><span></span><span></span></div>
+      </div>
     `;
 
     const burst = document.createElement("div");
