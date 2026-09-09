@@ -273,77 +273,126 @@ html = f"""
     position:absolute; inset:0;
     width:100%; height:100%;
     opacity: .95;
+    pointer-events:none;
   }}
 
-  /* Stops - BIGGER AND MORE VISIBLE */
+  /* STOPS - BIG, BRIGHT, VISIBLE */
   .stop{{
     position:absolute;
-    width: 56px; 
-    height: 56px;
-    border-radius: 999px;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
     transform: translate(-50%, -50%);
-    display:grid;
-    place-items:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     cursor:pointer;
     user-select:none;
-    background: rgba(255, 255, 255, 0.95);
-    border: 3px solid rgba(255, 200, 100, 0.8);
-    box-shadow: 0 0 30px rgba(255, 200, 100, 0.4), 0 16px 40px rgba(0,0,0,0.3);
-    transition: transform .2s ease, box-shadow .2s ease;
+    background: radial-gradient(circle, #ffffff, #f0e6d0);
+    border: 4px solid #ffd700;
+    box-shadow: 
+      0 0 30px rgba(255, 215, 0, 0.6),
+      0 0 60px rgba(255, 215, 0, 0.3),
+      inset 0 2px 10px rgba(255,215,0,0.2);
+    transition: all 0.3s ease;
     z-index:10;
     font-weight: 900;
-    color: rgba(70, 20, 50, 0.95);
+    color: #4a1a2a;
+    font-size: 18px;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+  }}
+  .stop::before {{
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.2);
+    animation: pulse 2s ease-in-out infinite;
+    z-index: -1;
+  }}
+  @keyframes pulse {{
+    0%, 100% {{ transform: scale(1); opacity: 0.5; }}
+    50% {{ transform: scale(1.3); opacity: 0.2; }}
   }}
   .stop:hover{{ 
-    transform: translate(-50%, -50%) scale(1.15); 
-    box-shadow: 0 0 50px rgba(255, 200, 100, 0.6), 0 16px 40px rgba(0,0,0,0.4);
+    transform: translate(-50%, -50%) scale(1.2); 
+    box-shadow: 
+      0 0 50px rgba(255, 215, 0, 0.8),
+      0 0 80px rgba(255, 215, 0, 0.4);
+    border-color: #ffaa00;
+    z-index:15;
   }}
   .stop .n{{ 
     font-weight: 900; 
-    font-size: 16px; 
-    color: rgba(70, 20, 50, 0.95);
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    font-size: 20px; 
+    color: #4a1a2a;
+    z-index:2;
+    position:relative;
   }}
   .stop.active{{ 
-    border-color: rgba(255, 0, 90, 0.8);
-    box-shadow: 0 0 40px rgba(255, 0, 90, 0.5), 0 16px 40px rgba(0,0,0,0.3);
-    transform: translate(-50%, -50%) scale(1.1);
+    border-color: #ff1493;
+    box-shadow: 
+      0 0 40px rgba(255, 20, 147, 0.7),
+      0 0 80px rgba(255, 20, 147, 0.3);
+    transform: translate(-50%, -50%) scale(1.15);
+    background: radial-gradient(circle, #fff5f5, #ffe0e8);
   }}
   .stop.opened{{ 
-    border-color: rgba(255, 215, 0, 0.9);
-    background: rgba(255, 245, 230, 0.98);
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5), 0 16px 40px rgba(0,0,0,0.3);
+    border-color: #ff6b6b;
+    background: radial-gradient(circle, #fff5f5, #ffe8e8);
+    box-shadow: 
+      0 0 40px rgba(255, 107, 107, 0.5),
+      0 0 80px rgba(255, 107, 107, 0.2);
+  }}
+  .stop.opened::after {{
+    content: '✓';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 14px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.4);
   }}
 
   .hint{{
     position:absolute;
     left: 50%;
-    top: -44px;
+    top: -48px;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.9);
     border: 1px solid rgba(255,255,255,0.2);
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 999px;
     font-size: 11px;
     color: rgba(255,255,255,0.95);
     opacity: 0;
     white-space: nowrap;
-    transition: opacity .2s ease;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
     pointer-events:none;
     font-weight: 600;
+    z-index:20;
   }}
   .stop:hover .hint{{ opacity: 1; }}
 
-  /* Plane - BIGGER */
+  /* Plane */
   .plane{{
     position:absolute;
-    font-size: 42px;
+    font-size: 44px;
     transform: translate(-50%, -50%);
     z-index: 20;
-    filter: drop-shadow(0 18px 25px rgba(255,200,100,0.3));
+    filter: drop-shadow(0 18px 30px rgba(255,200,100,0.5));
     will-change: left, top;
     transition: none;
+    pointer-events:none;
   }}
 
   /* Bottom bar */
@@ -375,12 +424,12 @@ html = f"""
   .giftFall{{
     position:fixed;
     top:-70px;
-    width: 50px; 
-    height: 50px;
+    width: 54px; 
+    height: 54px;
     border-radius: 16px;
-    background: rgba(255,255,255,.9);
-    border: 2px solid rgba(255,215,0,0.6);
-    box-shadow: 0 16px 40px rgba(255,200,100,0.2);
+    background: linear-gradient(135deg, #fff5f5, #ffffff);
+    border: 2px solid rgba(255,215,0,0.7);
+    box-shadow: 0 16px 40px rgba(255,200,100,0.3);
     display:grid;
     place-items:center;
     z-index: 60;
@@ -388,10 +437,12 @@ html = f"""
     user-select:none;
     animation: fall linear forwards;
     transform: translateX(-50%);
-    font-size: 24px;
+    font-size: 28px;
+    transition: transform 0.2s ease;
   }}
   .giftFall:hover{{
-    transform: translateX(-50%) scale(1.1);
+    transform: translateX(-50%) scale(1.15);
+    box-shadow: 0 20px 50px rgba(255,200,100,0.5);
   }}
   @keyframes fall{{
     from{{ transform: translateX(-50%) translateY(0) rotate(0deg); }}
@@ -401,17 +452,13 @@ html = f"""
   /* blast particles */
   .burst{{
     position:fixed;
-    width: 12px; 
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255,0,90,.85);
-    box-shadow: 0 0 20px rgba(255,0,90,.4);
     pointer-events:none;
     z-index: 500;
-    animation: burst .85s ease forwards;
+    animation: burst .9s ease forwards;
+    border-radius: 50%;
   }}
   @keyframes burst{{
-    from{{ transform: translate(-50%,-50%) scale(.7); opacity: .95; }}
+    from{{ transform: translate(-50%,-50%) scale(0.5); opacity: 1; }}
     to  {{ transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; }}
   }}
 
@@ -581,7 +628,7 @@ html = f"""
     <div class="pill">
       <div class="brand">
         <div class="brandTop">✈️ Meera ❤ Zeel — Love River Flight</div>
-        <div class="brandSub">Click on station dots • Plane flies • Gifts rain with wishes</div>
+        <div class="brandSub">Click on gold station dots • Plane flies to each stop</div>
       </div>
     </div>
     <div class="pill">
@@ -619,7 +666,7 @@ html = f"""
     <div class="bar">
       <div>
         <div class="nowTitle" id="nowTitle">📍 Stop 1: Instagram Request 💌</div>
-        <div class="nowSub" id="nowSub">Click any station dot to fly there ✈️</div>
+        <div class="nowSub" id="nowSub">✨ Click any gold dot to fly there</div>
       </div>
       <div class="tiny" style="font-size:14px; background:rgba(255,255,255,0.2); padding:6px 14px; border-radius:999px;">
         🎁 Click falling gifts!
@@ -710,17 +757,18 @@ html = f"""
   const wishL1 = document.getElementById("wishL1");
   const wishL2 = document.getElementById("wishL2");
 
+  // STATION POSITIONS - spread out along the river
   const POS = [
     {{x:50, y:8}},
-    {{x:38, y:16}},
-    {{x:58, y:24}},
-    {{x:42, y:33}},
-    {{x:62, y:42}},
-    {{x:46, y:50}},
-    {{x:64, y:58}},
-    {{x:44, y:66}},
-    {{x:60, y:74}},
-    {{x:43, y:82}},
+    {{x:35, y:16}},
+    {{x:60, y:25}},
+    {{x:40, y:34}},
+    {{x:63, y:43}},
+    {{x:45, y:52}},
+    {{x:65, y:60}},
+    {{x:42, y:68}},
+    {{x:60, y:76}},
+    {{x:40, y:83}},
     {{x:62, y:88}},
     {{x:50, y:93}},
     {{x:55, y:97}},
@@ -734,8 +782,6 @@ html = f"""
     const total = STAGES.length;
     const openedCount = opened.size;
     counter.textContent = `${{openedCount}} / ${{total}} opened`;
-    const pct = Math.round((openedCount/total)*100);
-    // Update progress if you want
   }}
   
   function save(){{
@@ -875,19 +921,20 @@ html = f"""
   wishBack.addEventListener("click", (e)={{ if(e.target === wishBack) closeWish(); }});
 
   function blastAt(clientX, clientY){{
-    const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bb5", "#a66bff", "#ff9f43"];
-    for(let i=0;i<24;i++){{
+    const colors = ["#ff6b6b", "#ffd93d", "#6bcb77", "#4d96ff", "#ff6bb5", "#a66bff", "#ff9f43", "#00d2d3"];
+    for(let i=0;i<30;i++){{
       const p = document.createElement("div");
       p.className = "burst";
-      const angle = (Math.PI * 2 * i) / 24;
-      const dist = 60 + Math.random() * 100;
+      const angle = (Math.PI * 2 * i) / 30 + Math.random() * 0.3;
+      const dist = 60 + Math.random() * 120;
       p.style.left = clientX + "px";
       p.style.top  = clientY + "px";
       p.style.setProperty("--dx", Math.cos(angle) * dist + "px");
-      p.style.setProperty("--dy", Math.sin(angle) * dist + "px");
+      p.style.setProperty("--dy", Math.sin(angle) * dist - 30 + "px");
       p.style.background = colors[Math.floor(Math.random() * colors.length)];
-      p.style.width = (6 + Math.random() * 8) + "px";
+      p.style.width = (6 + Math.random() * 10) + "px";
       p.style.height = p.style.width;
+      p.style.boxShadow = `0 0 20px ${{colors[Math.floor(Math.random() * colors.length)]}}40`;
       document.body.appendChild(p);
       setTimeout(()=> p.remove(), 900);
     }}
@@ -909,8 +956,8 @@ html = f"""
     setTimeout(()=> g.remove(), 9000);
   }}
   
-  // Spawn gifts every 600ms
-  setInterval(spawnFallingGift, 600);
+  // Spawn gifts every 500ms
+  setInterval(spawnFallingGift, 500);
 
   // Init
   buildStops();
@@ -929,9 +976,9 @@ st.components.v1.html(html, height=780, scrolling=False)
 
 st.info(
     "💝 **Meera & Zeel's Love River Flight**\n\n"
-    "• Click on the numbered **station dots** (1-13) along the river\n"
-    "• Watch the **plane fly** to each station\n"
+    "• Click on the **gold numbered dots** (1-13) along the river\n"
+    "• Watch the **plane fly** to each station with smooth animation\n"
     "• Each stop opens a **memory with photo**\n"
     "• Click **falling gifts** for surprise love wishes\n"
-    "• Beautiful light blue wave background with hearts ✨"
+    "• Beautiful light blue wave background with floating hearts ✨"
 )
